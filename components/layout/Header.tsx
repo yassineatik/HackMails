@@ -11,8 +11,8 @@ const Header = () => {
 
     const { theme, setTheme } = useTheme()
     return (
-        <div className='flex flex-row border-b border-b-gray-800 w-full justify-around items-center px-10 py-4'>
-            <h3 className='text-3xl text-slate-800 font-bold first-letter:text-slate-600 whitespace-nowrap dark:text-slate-300 dark:first-letter:text-slate-500 '>
+        <div className='flex flex-row border-b border-b-gray-100 w-full justify-around items-center px-10 py-4 '>
+            <h3 className='text-3xl text-cyan-800 font-bold first-letter:text-cyan-600 tracking-wider  whitespace-nowrap  dark:first-letter:text-cyan-400 bg-gradient-to-b from-slate-600 via-slate-500 to-gray-800 dark:bg-gradient-to-b dark:from-slate-400 dark:via-slate-500 dark:to-gray-300   bg-clip-text text-transparent'>
                 <Link href="/">High Journey</Link>
             </h3>
             <ul className='flex flex-row gap-7 justify-center w-full  items-center list-none  m-auto'>
