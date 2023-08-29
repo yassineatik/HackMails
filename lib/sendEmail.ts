@@ -21,24 +21,24 @@ export async function sendMail(
         },
     });
 
-    var mailOptions = {
-        from: user,
-        to: toEmail,
-        subject: subject,
-        text: otpText,
-        attachements: [
-            {
-                filename: "logo.png",
-                path: "/public/logo.png",
-                cid: "logo",
-            },
-        ],
-    };
+    // var mailOptions = {
+    //     from: user,
+    //     to: toEmail,
+    //     subject: subject,
+    //     text: otpText,
+    //     attachements: [
+    //         {
+    //             filename: "logo.png",
+    //             path: "/public/logo.png",
+    //             cid: "logo",
+    //         },
+    //     ],
+    // };
 
     await new Promise((resolve, reject) => {
         transporter.sendMail(
             {
-                from: "contact@atikdev.me",
+                from: user,
                 to: toEmail,
                 subject: subject,
                 text: otpText,
@@ -51,8 +51,10 @@ export async function sendMail(
             },
             (err: any, response: any) => {
                 if (err) {
+                    console.log("err from sendMail.ts", err);
                     reject(err);
                 } else {
+                    console.log("response from sendMail.ts", response);
                     resolve(response);
                 }
             }
