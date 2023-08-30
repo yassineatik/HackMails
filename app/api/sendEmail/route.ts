@@ -12,8 +12,8 @@ export const POST = async (req: Request, res: Response) => {
         secure = true,
         user,
         pass,
+        attachmentPath = null,
     } = body;
-    console.log("body from Route.ts", body);
     try {
         await sendMail(
             subject,
@@ -23,7 +23,8 @@ export const POST = async (req: Request, res: Response) => {
             port,
             secure,
             user,
-            pass
+            pass,
+            attachmentPath
         );
         return NextResponse.json({ message: "Email sent" }, { status: 200 });
     } catch (err) {

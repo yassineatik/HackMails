@@ -9,7 +9,8 @@ export async function sendMail(
     port: number,
     secure: boolean,
     user: string,
-    pass: string
+    pass: string,
+    attachmentPath: string | null
 ) {
     var transporter = nodemailer.createTransport({
         host: host,
@@ -42,12 +43,14 @@ export async function sendMail(
                 to: toEmail,
                 subject: subject,
                 text: otpText,
-                attachments: [
-                    {
-                        filename: "YassineAtik-FR.pdf",
-                        path: "./public/YassineAtik-FR.pdf",
-                    },
-                ],
+                ...(attachmentPath && {
+                    attachments: [
+                        {
+                            filename: "CV.pdf",
+                            path: attachmentPath,
+                        },
+                    ],
+                }),
             },
             (err: any, response: any) => {
                 if (err) {

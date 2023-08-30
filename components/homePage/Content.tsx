@@ -5,6 +5,7 @@ import {
 import { Icon } from '@iconify/react/dist/iconify.js';
 import { Button } from '../ui/button';
 import axios from 'axios';
+import { saveToDatabase, getSignature } from "../../app/_actions"
 
 const Content = () => {
     const [openSmtp, setOpenSmtp] = React.useState(true);
@@ -17,26 +18,43 @@ const Content = () => {
     const [ssl, setSsl] = useState(true)
     const [subject, setSubject] = useState('')
     const [body, setBody] = useState('')
-    const [attachment, setAttachment] = useState('')
+    const [attachment, setAttachment]: any = useState('')
     const [recipients, setRecipients] = useState('')
     const [loading, setLoading] = useState(false)
+    const [isDone, setIsDone] = useState(false)
+
     const [sentEmails, setSentEmails]: any = useState([])
 
-    const handleSubmit = () => {
-        console.log('subject : ', subject)
-        console.log('body : ', body)
-        console.log('attachment : ', attachment)
-        console.log('recipients : ', recipients)
+    const handleSubmit = async () => {
+        // check if the emails are valid
+        if (recipients.split('\n').length == 0) {
+            alert('Please enter at least one email')
+            setLoading(false)
+            return
+        }
+        // check if emails format is valid
+        for (let i = 0; i < recipients.split('\n').length; i++) {
+            const element = recipients.split('\n')[i];
+            if (element.split(':').length != 2) {
+                alert('Please enter a valid email format')
+                setLoading(false)
+                return
+            }
+        }
+        if (subject == '') {
+            setLoading(false)
+            alert('Please enter a subject')
+            return
+        }
         setLoading(true)
 
         const combo = recipients.split('\n')
         for (let i = 0; i < combo.length; i++) {
             const element = combo[i];
-
             const email = element.split(':')[0]
             const name = element.split(':')[1]
             let updatedBody = body.replaceAll('{{name}}', name)
-            axios.post('/api/sendEmail', JSON.stringify(
+            await axios.post('/api/sendEmail', JSON.stringify(
                 {
                     subject: subject,
                     toEmail: email,
@@ -46,10 +64,10 @@ const Content = () => {
                     secure: ssl,
                     user: user,
                     pass: pass,
+                    attachmentPath: attachment
                 }
-
             )).then(res => {
-                console.log('res', res)
+                console.log('response', res)
                 if (res.status == 200) {
                     setSentEmails([...sentEmails, email])
                 }
@@ -65,8 +83,37 @@ const Content = () => {
             })
         }
         setLoading(false)
-
+        setIsDone(true)
     }
+
+    const uploadFile = async (file: any) => {
+        const { timestamp, signature }: any = await getSignature();
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string);
+        formData.append('signature', signature);
+        formData.append('timestamp', timestamp);
+        formData.append('folder', 'next');
+
+        const endpoint = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL as string;
+
+        // Add the resource type "raw" to the formData
+        formData.append('resource_type', 'raw');
+
+        const data = await fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+        }).then(res => res.json());
+
+        const url = await saveToDatabase({
+            public_id: data?.public_id,
+            version: data?.version,
+            signature: data?.signature,
+        });
+        setAttachment(url)
+    }
+
 
     return (
         <div className='flex flex-col items-center justify-center w-full h-full gap-10 m-6'>
@@ -92,7 +139,7 @@ const Content = () => {
 
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>SMTP Server</label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' onChange={
+                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-server' onChange={
                                     (e) => {
                                         setServer(e.target.value)
                                     }
@@ -100,7 +147,7 @@ const Content = () => {
                             </div>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>SMTP Port <span className='text-sm text-gray-500'> (default: 465)</span></label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-port'
                                     onChange={
                                         (e) => {
                                             setPort(e.target.value)
@@ -113,7 +160,7 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>SMTP Username</label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-user'
                                     onChange={
                                         (e) => {
                                             setUser(e.target.value)
@@ -124,7 +171,7 @@ const Content = () => {
                             </div>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>SMTP Password</label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-pass'
                                     onChange={
                                         (e) => {
                                             setPass(e.target.value)
@@ -147,7 +194,6 @@ const Content = () => {
                         </div>
                         <div className='flex flex-row items-end justify-end w-full'>
                             <Button type='button' onClick={() => {
-                                handleSubmit()
                                 setOpenSmtp(false)
                                 setOpenEmail(true)
                             }} className='text-lg' size="lg" >Next </Button>
@@ -177,7 +223,7 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>Email Subject</label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='subject'
                                     onChange={
                                         (e) => {
                                             setSubject(e.target.value)
@@ -189,7 +235,7 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>Email Body</label>
-                                <textarea rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <textarea rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='body'
                                     onChange={
                                         (e) => {
                                             setBody(e.target.value)
@@ -201,13 +247,12 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>Attachment</label>
-                                <input type='file' className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <input type='file' className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='attachment'
                                     onChange={
                                         (e) => {
-                                            setAttachment(e.target.value)
-
+                                            uploadFile(e.target.files ? e.target.files[0] : null)
                                         }
-                                    } value={attachment}
+                                    }
                                 />
                             </div>
                         </div>
@@ -218,7 +263,6 @@ const Content = () => {
                                 setOpenEmailReceipts(true)
                                 console.log('clicked')
                                 console.log(openEmailReceipts)
-
                             }} className='text-lg' size="lg" >Next </Button>
                         </div>
 
@@ -248,7 +292,7 @@ const Content = () => {
                             <div className='flex flex-col items-start justify-center w-full gap-3'>
                                 <p className="text-xl font-bold">NOTE : <span className='font-normal'>Recipients format must be like this </span> email:name</p>
                                 <p>eg : <span className='font-bold '>contact@atikdev.me:Yassine</span></p>
-                                <textarea placeholder='' rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md '
+                                <textarea placeholder='' rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='recipients'
                                     onChange={
                                         (e) => {
                                             setRecipients(e.target.value)
@@ -269,6 +313,15 @@ const Content = () => {
                     </form>
                 </Collapse>
             </div>
+            {
+
+                loading &&
+                <div className='flex flex-col items-center justify-center'>
+                    <Icon icon="tdesign:loading" className="animate-spin" fontSize={40} />
+                    Sending emails ... ({sentEmails.length} / {recipients.split('\n').length})
+                </div>
+
+            }
         </div >
     )
 }
