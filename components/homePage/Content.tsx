@@ -223,7 +223,7 @@ const Content = () => {
                     <form className='flex flex-col items-center justify-center w-full gap-2 mt-4 ' onSubmit={(e) => { e.preventDefault() }}
                     >
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
-                            <div className='flex flex-col items-start justify-center w-full'>
+                            <div className='flex flex-col items-start gap-2 justify-center w-full'>
                                 <label className='font-medium text-md'>Email Subject</label>
                                 <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='subject'
                                     onChange={
@@ -235,8 +235,19 @@ const Content = () => {
                             </div>
                         </div>
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
-                            <div className='flex flex-col items-start justify-center w-full'>
-                                <label className='font-medium text-md'>Email Body</label>
+                            <div className='flex flex-col items-start gap-2 justify-center w-full'>
+                                <label className='font-medium text-md flex flex-col'>
+                                    Email Body
+
+                                    <p
+                                        className='text-md text-gray-700'
+                                    >
+                                        You can use <span className='font-bold'>{`{{name}}`}</span> to use the name of the recipient in the email body
+                                    </p>
+                                    <span className='mt-4'>
+                                        eg : <span className='font-bold'>Hello {`{{name}}`} , how are you ?</span>
+                                    </span>
+                                </label>
                                 <textarea rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='body'
                                     onChange={
                                         (e) => {
@@ -247,7 +258,7 @@ const Content = () => {
                             </div>
                         </div>
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
-                            <div className='flex flex-col items-start justify-center w-full'>
+                            <div className='flex flex-col items-start gap-2 justify-center w-full'>
                                 <label className='font-medium text-md'>Attachment</label>
                                 <input type='file' className=' cursor-pointer w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='attachment'
                                     onChange={
