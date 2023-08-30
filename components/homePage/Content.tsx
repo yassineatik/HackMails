@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react/dist/iconify.js';
 import { Button } from '../ui/button';
 import axios from 'axios';
 import { saveToDatabase, getSignature } from "../../app/_actions"
+import GithubStar from './GithubStar';
 
 const Content = () => {
     const [openSmtp, setOpenSmtp] = React.useState(true);
@@ -117,7 +118,8 @@ const Content = () => {
 
     return (
         <div className='flex flex-col items-center justify-center w-full h-full gap-10 m-6'>
-            <div className='w-[50%] overflow-hidden bg-white shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'>
+            <GithubStar />
+            <div className='w-[50%] overflow-hidden  shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md '>
                 <div className='flex flex-row items-center justify-between w-full cursor-pointer ' onClick={
                     () => {
                         setOpenSmtp(!openSmtp)
@@ -201,7 +203,7 @@ const Content = () => {
                     </form>
                 </Collapse>
             </div>
-            <div className='w-[50%] overflow-hidden bg-white shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'
+            <div className='w-[50%] overflow-hidden  shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'
             >
                 <div className='flex flex-row items-center justify-between w-full cursor-pointer ' onClick={
                     () => {
@@ -247,7 +249,7 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>Attachment</label>
-                                <input type='file' className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='attachment'
+                                <input type='file' className=' cursor-pointer w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='attachment'
                                     onChange={
                                         (e) => {
                                             uploadFile(e.target.files ? e.target.files[0] : null)
@@ -270,7 +272,7 @@ const Content = () => {
                     </form>
                 </Collapse>
             </div>
-            <div className='w-[50%] overflow-hidden bg-white shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'
+            <div className='w-[50%] overflow-hidden  shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'
             >
                 <div className='flex flex-row items-center justify-between w-full cursor-pointer ' onClick={
                     () => {
