@@ -9,7 +9,7 @@ import { saveToDatabase, getSignature } from "../../app/_actions"
 import GithubStar from './GithubStar';
 import { toast } from 'react-toastify';
 import Lottie from 'lottie-react';
-import Done from '../../public/done.json'
+import Done from '../../public/Done.json'
 
 
 const Content = () => {
