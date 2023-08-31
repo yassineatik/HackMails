@@ -8,6 +8,9 @@ import axios from 'axios';
 import { saveToDatabase, getSignature } from "../../app/_actions"
 import GithubStar from './GithubStar';
 import { toast } from 'react-toastify';
+import Lottie from 'lottie-react';
+import Done from '../../public/done.json'
+
 
 const Content = () => {
     const [openSmtp, setOpenSmtp] = React.useState(true);
@@ -77,12 +80,15 @@ const Content = () => {
                     toast.error('Please check your SMTP credentials')
                     i = combo.length
                 } else {
-                    toast.error('An error occured , please try again')
+                    toast.error('An error occured , Please check your SMTP credentials  ')
                 }
             })
         }
         setLoading(false)
         setIsDone(true)
+        setTimeout(() => {
+            setIsDone(false)
+        }, 5000)
     }
 
     const uploadFile = async (file: any) => {
@@ -263,7 +269,7 @@ const Content = () => {
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
                             <div className='flex flex-col items-start gap-2 justify-center w-full'>
                                 <label className='font-medium text-md'>Attachment</label>
-                                <input type='file' className=' cursor-pointer w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='attachment'
+                                <input type='file' accept='application/pdf' className=' block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400' name='attachment'
                                     onChange={
                                         (e) => {
                                             uploadFile(e.target.files ? e.target.files[0] : null)
@@ -338,6 +344,19 @@ const Content = () => {
                 </div>
 
             }
+            <div className={` flex-col items-center justify-center ${isDone ? 'flex' : 'hidden'}`}>
+                <div className='flex flex-row items-center gap-3'>
+
+                    {/* <Icon icon="mdi:check-circle-outline" className="text-green-500" fontSize={40} /> */}
+                    <Lottie animationData={Done} loop={true} className='w-10 h-10' />
+                    <p className='text-xl font-semibold'>Done !</p>
+                </div>
+                <div className='flex flex-col items-center justify-center'>
+                    <p className='text-lg font-semibold'>Sent {sentEmails.length} emails</p>
+                    <p className='text-lg font-semibold'>Failed {recipients.split('\n').length - sentEmails.length} emails</p>
+                </div>
+            </div>
+
         </div >
     )
 }
