@@ -26,7 +26,7 @@ const Header = () => {
         <div className='flex flex-row border-b dark:border-b-gray-100 w-full justify-around items-center px-10 py-4  border-b-gray-300 '>
             <h3 className='text-3xl flex flex-row items-center gap-2  dark:text-gray-300 font-bold  tracking-wider  whitespace-nowrap   text-gray-700'>
                 <Link href="/">HackMails</Link>
-                <Icon icon="clarity:email-line" className=" animate-bounsce" />
+                <Icon icon="clarity:email-line" className=" animate-bounce" />
             </h3>
             {/* <ul className='flex flex-row gap-7 justify-center w-full  items-center list-none  m-auto'>
                 <li className='text-sm'><Link href="/playground">Playground</Link></li>
