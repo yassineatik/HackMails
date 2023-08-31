@@ -7,6 +7,7 @@ import { Button } from '../ui/button';
 import axios from 'axios';
 import { saveToDatabase, getSignature } from "../../app/_actions"
 import GithubStar from './GithubStar';
+import { toast } from 'react-toastify';
 
 const Content = () => {
     const [openSmtp, setOpenSmtp] = React.useState(true);
@@ -76,10 +77,10 @@ const Content = () => {
                 console.log('waaaaaaaaa', err)
                 if (err.response.data.message?.errno == -3008 || err.response.data.message?.errno == -3004) {
                     console.log('error')
-                    alert('Couldn\'t connect to the server , please check your credentials')
+                    toast.error('Please check your SMTP credentials')
                     i = combo.length
                 } else {
-                    alert('An error occured , please try again')
+                    toast.error('An error occured , please try again')
                 }
             })
         }
@@ -173,7 +174,7 @@ const Content = () => {
                             </div>
                             <div className='flex flex-col items-start justify-center w-full'>
                                 <label className='font-medium text-md'>SMTP Password</label>
-                                <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-pass'
+                                <input type='password' className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-pass'
                                     onChange={
                                         (e) => {
                                             setPass(e.target.value)
