@@ -26,26 +26,23 @@ const Content = () => {
     const [isDone, setIsDone] = useState(false)
 
     const [sentEmails, setSentEmails]: any = useState([])
-
     const handleSubmit = async () => {
-        // check if the emails are valid
         if (recipients.split('\n').length == 0) {
-            alert('Please enter at least one email')
+            toast.error('Please enter at least one recipient')
             setLoading(false)
             return
         }
-        // check if emails format is valid
         for (let i = 0; i < recipients.split('\n').length; i++) {
             const element = recipients.split('\n')[i];
             if (element.split(':').length != 2) {
-                alert('Please enter a valid email format')
+                toast.error('Emails format must be like this : email:name')
                 setLoading(false)
                 return
             }
         }
-        if (subject == '') {
+        if (subject === '' || subject === null || subject === undefined) {
             setLoading(false)
-            alert('Please enter a subject')
+            toast.error('Please enter a subject')
             return
         }
         setLoading(true)
@@ -136,6 +133,11 @@ const Content = () => {
                         fontSize={32} />
                 </div>
                 <Collapse open={openSmtp}>
+                    <p
+                        className='text-md text-gray-700 dark:text-gray-300 mt-2'
+                    >
+                        <span className='font-bold'>NOTE : </span> If you are using gmail , you can follow  <a href='https://www.gmass.co/blog/gmail-smtp/' target='_blank' className='text-blue-500'>this guide</a> to get your SMTP credentials
+                    </p>
                     <form onSubmit={(e) => { e.preventDefault() }}
                         className='flex flex-col items-center justify-center w-full gap-3 mt-4'>
                         <div className='flex flex-row items-start justify-between w-full gap-4'>
