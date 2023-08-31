@@ -9,7 +9,7 @@ const Footer = () => {
                 Powered by <Link href="https://vercel.com/" className='font-bold cursor-pointer' target='_blank'>Vercel</Link>
             </p>
             <div className='Icons flex flex-row gap-3'>
-                <Link href="https://github.com/yassineatik/highjourney" className='cursor-pointer' target='_blank'>
+                <Link href="https://github.com/yassineatik/hackmails" className='cursor-pointer' target='_blank'>
                     <Icon icon="akar-icons:github-fill" fontSize={26} />
 
                 </Link>

@@ -7,8 +7,8 @@ import Providers from './themeProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'High Journey',
-  description: 'Generate image by text - Text to Image',
+  title: 'Hack Mails',
+  description: "Hack Mails is a free, open-source, and privacy-focused email service.",
 }
 
 export default function RootLayout({
