@@ -8,7 +8,25 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Hack Mails',
-  description: "Hack Mails is a free, open-source, and privacy-focused email service.",
+  description: "Effortlessly streamline your job application process with our personalized email tool. Send tailored emails to multiple companies using dynamic placeholders, eliminating the need for manual editing. Automate your outreach, save time, and make a lasting impression on potential employers. Simplify your job search today.",
+  // set the image here to be used in meta tags for social sharing
+  openGraph: {
+    title: "HackMails - Reach More ",
+    description:
+      "Streamlined Job Application Email Tool .",
+    url: "https://www.hackmails.com/",
+    siteName: "HackMails",
+    images: [
+      {
+        url: "/og.png",
+        width: 1920,
+        height: 1080,
+      },
+    ],
+    locale: "en-US",
+    type: "website",
+  },
+
 }
 
 export default function RootLayout({
