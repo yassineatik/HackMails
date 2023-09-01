@@ -21,7 +21,7 @@ function RecipientSetup({ open, onClick, recipients, setRecipients, handleSubmit
                         <div className='flex flex-col items-start justify-center w-full gap-3'>
                             <p className="text-xl font-bold">NOTE : <span className='font-normal'>Recipients format must be like this </span> email:name</p>
                             <p>eg : <span className='font-bold '>contact@atikdev.me:Yassine</span></p>
-                            <textarea placeholder='' rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='recipients'
+                            <textarea placeholder='email@xyz.com:name' rows={4} className='dark:bg-neutral-700 w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='recipients'
                                 onChange={
                                     (e) => {
                                         setRecipients(e.target.value)

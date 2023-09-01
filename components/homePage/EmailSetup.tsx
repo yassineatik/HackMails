@@ -20,7 +20,7 @@ function EmailSetup({ open, onClick, subject, setSubject, body, setBody, uploadF
                     <div className='flex flex-row items-start justify-between w-full gap-4'>
                         <div className='flex flex-col items-start gap-2 justify-center w-full'>
                             <label className='font-medium text-md'>Email Subject</label>
-                            <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='subject'
+                            <input className=' dark:bg-neutral-700 w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='subject'
                                 onChange={
                                     (e) => {
                                         setSubject(e.target.value)
@@ -43,7 +43,7 @@ function EmailSetup({ open, onClick, subject, setSubject, body, setBody, uploadF
                                     eg : <span className='font-bold'>Hello {`{{name}}`} , how are you ?</span>
                                 </span>
                             </label>
-                            <textarea rows={4} className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='body'
+                            <textarea rows={4} className='dark:bg-neutral-700 w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='body'
                                 onChange={
                                     (e) => {
                                         setBody(e.target.value)

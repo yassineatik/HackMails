@@ -26,7 +26,7 @@ function SmtpSetup({ open, onClick, server, setServer, port, setPort, user, setU
 
                         <div className='flex flex-col items-start justify-center w-full'>
                             <label className='font-medium text-md'>SMTP Server</label>
-                            <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-server' onChange={
+                            <input className='w-full p-2 font-medium dark:bg-neutral-700 border-2 border-gray-900 rounded-md text-md ' name='smtp-server' onChange={
                                 (e) => {
                                     setServer(e.target.value)
                                 }
@@ -34,7 +34,7 @@ function SmtpSetup({ open, onClick, server, setServer, port, setPort, user, setU
                         </div>
                         <div className='flex flex-col items-start justify-center w-full'>
                             <label className='font-medium text-md'>SMTP Port <span className='text-sm text-gray-500'> (default: 465)</span></label>
-                            <input className='w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-port'
+                            <input className='w-full p-2 font-medium dark:bg-neutral-700 border-2 border-gray-900 rounded-md text-md ' name='smtp-port'
                                 onChange={
                                     (e) => {
                                         setPort(e.target.value)
@@ -47,7 +47,7 @@ function SmtpSetup({ open, onClick, server, setServer, port, setPort, user, setU
                     <div className='flex flex-row items-start justify-between w-full gap-4'>
                         <div className='flex flex-col items-start justify-center w-full'>
                             <label className='font-medium text-md'>SMTP Username</label>
-                            <input className='w-full p-2 font-medium border-2   border-gray-900 rounded-md text-md ' name='smtp-user'
+                            <input className=' dark:bg-neutral-700 w-full p-2 font-medium border-2   border-gray-900 rounded-md text-md ' name='smtp-user'
                                 onChange={
                                     (e) => {
                                         setUser(e.target.value)
@@ -58,7 +58,7 @@ function SmtpSetup({ open, onClick, server, setServer, port, setPort, user, setU
                         </div>
                         <div className='flex flex-col items-start justify-center w-full'>
                             <label className='font-medium text-md'>SMTP Password</label>
-                            <input type='password' className=' dark:bg-transparent w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-pass'
+                            <input type='password' className=' dark:bg-neutral-700  w-full p-2 font-medium border-2 border-gray-900 rounded-md text-md ' name='smtp-pass'
                                 onChange={
                                     (e) => {
                                         setPass(e.target.value)
