@@ -28,8 +28,6 @@ We welcome contributions to make this tool even better! If you're interested in 
 4. Test your changes. ✔️
 5. Create a pull request to the `main` branch of this repository. 🚀
 
-Please refer to our [Contribution Guidelines](CONTRIBUTING.md) for more details.
-
 ## Installation 🛠️
 
 1. Clone this repository: `git clone https://github.com/yassineatik/HackMails.git` 🧬
