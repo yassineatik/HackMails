@@ -78,8 +78,6 @@ function Content() {
                 console.log('response', res);
                 if (res.status === 200) {
                     setSentEmails([...sentEmails, email]);
-                } else {
-                    setFailedEmails([...failedEmails, email]);
                 }
             }).catch(err => {
                 setFailedEmails([...failedEmails, email]);
@@ -126,7 +124,7 @@ function Content() {
 
 
     return (
-        <div className='flex flex-col items-center justify-center w-full h-full gap-10 m-6'>
+        <div className='flex flex-col items-center justify-center w-full h-full gap-10 m-2 sm:m-4 md:m-6'>
             <GithubStar />
             <SmtpSetup
                 open={openSmtp}
@@ -196,6 +194,13 @@ function Content() {
                 </div>
                 <div className='flex flex-col items-center justify-center'>
                     <p className='text-lg font-semibold'>Sent {sentEmails.length} emails</p>
+                    <ul>
+                        {
+                            sentEmails.map((email: any) => {
+                                return <li key={email}>{email}</li>
+                            })
+                        }
+                    </ul>
                     <p className='text-lg font-semibold'>Failed {failedEmails.length} emails</p>
                 </div>
             </div>

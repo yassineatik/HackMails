@@ -23,8 +23,8 @@ const Header = () => {
     }, [theme])
 
     return (
-        <div className='flex flex-row border-b dark:border-b-gray-100 w-full justify-around items-center px-10 py-4  border-b-gray-300 '>
-            <h3 className='text-3xl flex flex-row items-center gap-2  dark:text-gray-300 font-bold  tracking-wider  whitespace-nowrap   text-gray-700'>
+        <div className='flex flex-row border-b dark:border-b-gray-100 w-full justify-around items-center px-3 md:px-10 py-3 md:py-4  border-b-gray-300 '>
+            <h3 className='text-xl md:text-2xl lg:text-3xl flex flex-row items-center gap-2  dark:text-gray-300 font-bold  tracking-wider  whitespace-nowrap   text-gray-700'>
                 <Link href="/">HackMails</Link>
                 <Icon icon="clarity:email-line" className=" animate-bounce" />
             </h3>

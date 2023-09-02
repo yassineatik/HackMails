@@ -5,9 +5,9 @@ import { Button } from '../ui/button';
 
 function EmailSetup({ open, onClick, subject, setSubject, body, setBody, uploadFile, openEmail, setOpenEmail, setOpenSmtp, setOpenEmailReceipts }: any) {
     return (
-        <div className='w-[50%] overflow-hidden shadow-xl border-2 flex flex-col border-gray-900 m-auto py-5 px-4 rounded-md'>
+        <div className='w-[80%] sm:w-[75%] md:w-[50%]  overflow-hidden shadow-xl border-2 flex flex-col border-gray-900 m-auto py-3 px-3  md:py-5 md:px-4 rounded-md'>
             <div className='flex flex-row items-center justify-between w-full cursor-pointer ' onClick={onClick}>
-                <h2 className='text-xl font-semibold'>Set up email text & attachment</h2>
+                <h2 className='text-lg sm:text-xl font-semibold'>Set up email text & attachment</h2>
                 <Icon
                     icon="iconamoon:arrow-down-2-light"
                     className={`${open ? 'transform rotate-180 transition-transform duration-500' : 'transform rotate-0 transition-transform duration-500'}`}
