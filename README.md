@@ -18,6 +18,10 @@ Simplify your job application process with the Streamlined Job Application Email
 2. Use {{name}} in your email body template. 🧙‍♂️🔮
 3. Hit send and let the tool work its magic! 🚀✨
 
+# Video :
+https://github.com/yassineatik/HackMails/assets/77692478/3c6557cc-d780-4c5f-a681-00ea3219feb8
+
+
 ## Contribution Guidelines 🤝
 
 We welcome contributions to make this tool even better! If you're interested in contributing:
