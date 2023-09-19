@@ -1,6 +1,6 @@
 # Streamlined Job Application Email Tool 📧💼
 
-Simplify your job application process with the Streamlined Job Application Email Tool! This open-source web tool allows you to send personalized emails to multiple companies effortlessly. Say goodbye to manual edits and hello to efficiency. 🚀
+Simplify your job application process with the Streamlined Job Application Email Tool! This open-source web tool enables you to effortlessly send personalized emails to multiple companies. Bid farewell to manual edits and embrace efficiency. 🚀
 
 ## Features ✨
 
