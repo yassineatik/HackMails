@@ -37,7 +37,7 @@ We welcome contributions to make this tool even better! If you're interested in 
 1. Clone this repository: `git clone https://github.com/yassineatik/HackMails.git` 🧬
 2. Install dependencies: `npm install` 📦
 3. Create free account in [Cloudinary](https://cloudinary.com/) , and paste the credentials in .env file (see [.env.example](https://github.com/yassineatik/HackMails/blob/master/.env.example))
-4. Start the development server: `npm start` 🚀
+4. Start the development server: `npm run dev` 🚀
 
 ## Feedback and Support 📣🤗
 
